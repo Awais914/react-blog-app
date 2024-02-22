@@ -1,14 +1,11 @@
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
+import AppRoutes from 'components/Routes/routes';
 
 export default function App() {
   return (
     <Container maxWidth="sm">
-      <div className="my-4">
-        <Typography variant="h4" component="h1" sx={{ mb: 2 }}>
-          React Blog App
-        </Typography>
-      </div>
+      <AppRoutes />
     </Container>
   );
 }
