@@ -2,20 +2,27 @@ import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import Link from "@mui/material/Link";
 import { useFormik } from "formik";
-import { Box, Container, IconButton } from "@mui/material";
-import { signupSchema } from "utils/validations";
+import {
+  Box,
+  Checkbox,
+  Container,
+  Divider,
+  FormControlLabel,
+  IconButton,
+} from "@mui/material";
 import { VisibilityRounded, VisibilityOffRounded } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const Signup = () => {
+const Login = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState<Boolean>(false);
   const { values, errors, handleChange, handleSubmit } = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
-    validationSchema: signupSchema,
     onSubmit: (values) => {
       console.log("Submitted values:", values);
     },
@@ -28,21 +35,13 @@ const Signup = () => {
   return (
     <Container className="mt-[63px] max-w-[750px]">
       <Typography variant="h2" className="font-semibold	text-4xl text-center">
-        Create An Account
-      </Typography>
-
-      <Typography className="text-center">
-        Already have an account?{" "}
-        <Link to="/login" className="no-underline text-inherit">
-          Log in
-        </Link>
+        Log In
       </Typography>
 
       <Box component="form" onSubmit={handleSubmit} className="mt-[72px]">
         <Box>
-          <Typography>What's your email?</Typography>
+          <Typography>Email address or user name</Typography>
           <TextField
-            placeholder="Enter your email address"
             name="email"
             fullWidth
             margin="dense"
@@ -54,8 +53,8 @@ const Signup = () => {
         </Box>
 
         <Box>
-          <Box className="flex justify-between items-center mt-10">
-            <Typography>Create a password</Typography>
+          <Box className="flex justify-between items-center mt-6">
+            <Typography>Password</Typography>
             <Box className="flex items-center">
               <IconButton onClick={() => setShowPassword((prev) => !prev)}>
                 {showPassword ? (
@@ -74,7 +73,6 @@ const Signup = () => {
             name="password"
             fullWidth
             type={showPassword ? "text" : "password"}
-            placeholder="Enter your password"
             value={values.password}
             onChange={handleChange}
             error={!!errors.password}
@@ -82,9 +80,11 @@ const Signup = () => {
           />
         </Box>
 
-        <Typography className="mt-1">
-          Use 8 or more characters with a mix of letters, numbers & symbols
-        </Typography>
+        <Link className="flex justify-end mt-2">Forget your password</Link>
+        <FormControlLabel
+          control={<Checkbox defaultChecked />}
+          label="Remember me"
+        />
 
         <Button
           variant="contained"
@@ -92,14 +92,35 @@ const Signup = () => {
           size="large"
           fullWidth
           type="submit"
-          className="mt-10 py-4"
+          className="mt-4 py-4"
           disabled={!isFormValid()}
         >
-          Create An Account
+          Log in
+        </Button>
+
+        <Divider className="my-10" />
+
+        <Typography
+          sx={{ color: "primary.light" }}
+          className="text-center text-2xl"
+        >
+          Don’t have an account?
+        </Typography>
+
+        <Button
+          variant="outlined"
+          color="primary"
+          size="large"
+          fullWidth
+          type="submit"
+          className="mt-4 py-4"
+          onClick={() => navigate("/signup")}
+        >
+          Sign up
         </Button>
       </Box>
     </Container>
   );
 };
 
-export default Signup;
+export default Login;

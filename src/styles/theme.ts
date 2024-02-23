@@ -1,49 +1,56 @@
-import { createTheme, responsiveFontSizes, Theme } from '@mui/material';
+import { createTheme, responsiveFontSizes, Theme } from "@mui/material";
 
 export const getAppTheme = (): Theme => {
-	let theme = createTheme({
-		typography: {
-			allVariants: {
-				fontFamily: 'Poppins',
-				fontSize: '15px'
-			},
-			h2: {
-				color: '#111111',
-			},
-			body1: {
-				color: '#666666',
-			}
-		},
-		palette: {
+  let theme = createTheme({
+    typography: {
+      allVariants: {
+        fontFamily: "Poppins",
+        fontSize: "15px",
+      },
+      h2: {
+        color: "#222222",
+      },
+      body1: {
+        color: "#666666",
+      },
+      button: {
+        textTransform: "none",
+      },
+    },
+    palette: {
       primary: {
-        main: '#111111',
-      	light: '#222222',
+        main: "#111111",
+        dark: "#222222",
+        light: "#333333",
       },
       secondary: {
-        main: '#666666',
-      	light: '#595858',
+        main: "#666666",
+        dark: "#595858",
+        light: "#EAEAEA",
       },
-		},
-		components: {
-			MuiTextField: {
-				styleOverrides: {
-					root: {
-						'& .MuiOutlinedInput-root': {
-							borderWidth: 1,
-							borderRadius: 20,
-						},
-					}
-				},
-			},
-			MuiButton: {
-				styleOverrides: {
-					root: {
-						borderRadius: 20,
-					},
-				}, 
-			},
-		}
-	});
-	theme = responsiveFontSizes(theme);
-	return theme;
+    },
+    components: {
+      MuiTextField: {
+        styleOverrides: {
+          root: {
+            "& .MuiOutlinedInput-root": {
+              borderWidth: 1,
+              borderRadius: 20,
+              variant: "outlined",
+              margin: "normal",
+            },
+          },
+        },
+      },
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            borderRadius: 20,
+          },
+        },
+      },
+    },
+  });
+  theme = responsiveFontSizes(theme);
+  return theme;
 };

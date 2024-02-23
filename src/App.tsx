@@ -1,11 +1,16 @@
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import AppRoutes from 'components/Routes/routes';
+import Container from "@mui/material/Container";
+import Layout from "components/Layout";
+import AppRoutes from "components/Routes";
+import { BrowserRouter as Router } from "react-router-dom";
 
 export default function App() {
   return (
-    <Container maxWidth="sm">
-      <AppRoutes />
+    <Container>
+      <Router>
+        <Layout>
+          <AppRoutes />
+        </Layout>
+      </Router>
     </Container>
   );
 }
