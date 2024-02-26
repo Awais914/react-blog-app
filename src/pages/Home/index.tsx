@@ -1,14 +1,13 @@
 import { Box, Divider, Typography } from "@mui/material";
 import BlogCard from "components/Blog/Item";
+import PageTitle from "components/Header/PageTitle";
+import PaginationBar from "components/Pagination";
+import { useState } from "react";
 
-export const Home = () => {
+const Home = () => {
   return (
-    <Box className="flex flex-col mt-12">
-      <Typography variant="h2" className="text-4xl font-semibold">
-        Recent Posts
-      </Typography>
-
-      <Divider className="mt-3 mb-8" />
+    <Box className="flex flex-col">
+      <PageTitle title="Recent Posts" />
 
       <BlogCard />
       <BlogCard />
@@ -24,6 +23,10 @@ export const Home = () => {
       <BlogCard />
       <BlogCard />
       <BlogCard />
+
+      <PaginationBar />
     </Box>
   );
 };
+
+export default Home;

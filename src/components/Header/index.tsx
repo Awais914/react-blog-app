@@ -40,10 +40,20 @@ const Header = () => {
               }}
             />
 
-            <Button variant="outlined" className="mr-4 rounded-lg">
+            <Button
+              component={Link}
+              to="/login"
+              variant="outlined"
+              className="mr-4 rounded-lg"
+            >
               Log in
             </Button>
-            <Button variant="contained" className="rounded-lg">
+            <Button
+              component={Link}
+              to="/signup"
+              variant="contained"
+              className="rounded-lg"
+            >
               Sign up
             </Button>
           </Box>

@@ -28,6 +28,10 @@ export const getAppTheme = (): Theme => {
         dark: "#595858",
         light: "#EAEAEA",
       },
+      info: {
+        main: "#00A1E7",
+        light: "#6666664D",
+      },
     },
     components: {
       MuiTextField: {

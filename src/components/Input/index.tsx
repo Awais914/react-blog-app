@@ -1,10 +1,3 @@
-import { TextField } from "@mui/material";
+import PasswordField from "./PasswordField";
 
-const InputField = () => (
-  <TextField
-    variant="outlined"
-    margin="normal"
-    fullWidth
-    className=""
-  />
-);
+export { PasswordField };

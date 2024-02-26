@@ -5,8 +5,8 @@ import Typography from "@mui/material/Typography";
 import { useFormik } from "formik";
 import { Box, Container, IconButton } from "@mui/material";
 import { signupSchema } from "utils/validations";
-import { VisibilityRounded, VisibilityOffRounded } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import { PasswordField } from "components/Input";
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState<Boolean>(false);
@@ -53,38 +53,15 @@ const Signup = () => {
           />
         </Box>
 
-        <Box>
-          <Box className="flex justify-between items-center mt-10">
-            <Typography>Create a password</Typography>
-            <Box className="flex items-center">
-              <IconButton onClick={() => setShowPassword((prev) => !prev)}>
-                {showPassword ? (
-                  <VisibilityRounded />
-                ) : (
-                  <VisibilityOffRounded />
-                )}
-              </IconButton>
-              <Typography className="text-lg">
-                {showPassword ? "show" : "Hide"}
-              </Typography>
-            </Box>
-          </Box>
-
-          <TextField
-            name="password"
-            fullWidth
-            type={showPassword ? "text" : "password"}
-            placeholder="Enter your password"
-            value={values.password}
-            onChange={handleChange}
-            error={!!errors.password}
-            helperText={errors.password}
-          />
-        </Box>
-
-        <Typography className="mt-1">
-          Use 8 or more characters with a mix of letters, numbers & symbols
-        </Typography>
+        <PasswordField
+          title="Create a password"
+          name="password"
+          placeholder="Enter your password"
+          value={values.password}
+          onChange={handleChange}
+          error={!!errors.password}
+          helperText={errors.password}
+        />
 
         <Button
           variant="contained"

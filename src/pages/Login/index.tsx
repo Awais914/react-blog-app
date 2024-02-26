@@ -10,10 +10,9 @@ import {
   Container,
   Divider,
   FormControlLabel,
-  IconButton,
 } from "@mui/material";
-import { VisibilityRounded, VisibilityOffRounded } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import { PasswordField } from "components/Input";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -52,33 +51,14 @@ const Login = () => {
           />
         </Box>
 
-        <Box>
-          <Box className="flex justify-between items-center mt-6">
-            <Typography>Password</Typography>
-            <Box className="flex items-center">
-              <IconButton onClick={() => setShowPassword((prev) => !prev)}>
-                {showPassword ? (
-                  <VisibilityRounded />
-                ) : (
-                  <VisibilityOffRounded />
-                )}
-              </IconButton>
-              <Typography className="text-lg">
-                {showPassword ? "show" : "Hide"}
-              </Typography>
-            </Box>
-          </Box>
-
-          <TextField
-            name="password"
-            fullWidth
-            type={showPassword ? "text" : "password"}
-            value={values.password}
-            onChange={handleChange}
-            error={!!errors.password}
-            helperText={errors.password}
-          />
-        </Box>
+        <PasswordField
+          title="Password"
+          name="password"
+          value={values.password}
+          onChange={handleChange}
+          error={!!errors.password}
+          helperText={errors.password}
+        />
 
         <Link className="flex justify-end mt-2">Forget your password</Link>
         <FormControlLabel

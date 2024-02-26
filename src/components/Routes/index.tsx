@@ -1,5 +1,7 @@
 // import { Route } from '../types/Route';
-import { Home } from "pages/Home";
+import AccountSettings from "pages/Account";
+import Detail from "pages/Blog/Detail";
+import Home from "pages/Home";
 import Login from "pages/Login";
 import Signup from "pages/Signup";
 import {
@@ -36,6 +38,8 @@ const AppRoutes = () => {
           </Protected>
         }
       />
+      <Route path="blogs/:id" element={<Detail />} />
+      <Route path="account" element={<AccountSettings />} />
     </Routes>
   );
 };
