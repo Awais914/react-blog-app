@@ -1,4 +1,4 @@
-import { DateRange, AccessTime } from "@mui/icons-material";
+import { DateRange } from "@mui/icons-material";
 import { Box, Button, Chip, Divider, Typography } from "@mui/material";
 import Commentslist from "../Comment/list";
 import AddComment from "../Comment/add";
@@ -8,6 +8,7 @@ const BlogContent = () => {
     <Box className="flex flex-col">
       <Box className="flex items-center">
         <Chip label="Travel" className="rounded-[3px]" />
+
         <Typography className="border-2 bg-[#6435C81F] rounded-[3px] ml-3 px-4 py-1">
           3 min. To Read
         </Typography>
@@ -26,9 +27,13 @@ const BlogContent = () => {
           src="https://www.befunky.com/images/prismic/82e0e255-17f9-41e0-85f1-210163b0ea34_hero-blur-image-3.jpg?"
           className="size-[18px] rounded-full mr-2"
         />
+
         <Typography>Jesica koli</Typography>
+
         <Divider orientation="vertical" flexItem className="mx-[10px]" />
+
         <DateRange />
+
         <Typography>02 december 2022</Typography>
       </Box>
 
@@ -103,13 +108,16 @@ const BlogContent = () => {
           <Typography color="primary.dark" className="text-[27px]">
             24 comments
           </Typography>
+
           <Typography color="primary.dark" className="text-4xl mx-4">
             .
           </Typography>
+
           <Typography color="info.main" className="text-[27px]">
             Sign in to comment
           </Typography>
         </Box>
+
         <Divider className="mt-7 mb-4" />
 
         <AddComment />

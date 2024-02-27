@@ -1,7 +1,4 @@
-import { DateRange } from "@mui/icons-material";
-import { Box, Button, Divider, Typography } from "@mui/material";
-import React from "react";
-import { Link } from "react-router-dom";
+import { Box, Button, Typography } from "@mui/material";
 import Replies from "./replies";
 
 const Commentslist = () => {
@@ -16,6 +13,7 @@ const Commentslist = () => {
           <Typography color="primary.main" className="text-base	">
             Jesica koli
           </Typography>
+
           <Typography className="text-base ml-2">3 mins ago</Typography>
         </Box>
 
@@ -25,6 +23,7 @@ const Commentslist = () => {
         </Typography>
 
         <Button sx={{ color: "info.main" }}>Show replies (3)</Button>
+
         <Replies />
       </Box>
     </Box>

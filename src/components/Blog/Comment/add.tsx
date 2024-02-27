@@ -4,6 +4,7 @@ const AddComment = () => {
   return (
     <Box>
       <Typography>Add comment</Typography>
+
       <Box className="flex">
         <TextField fullWidth className="border rounded-[16px] mr-4 h-14" />
 

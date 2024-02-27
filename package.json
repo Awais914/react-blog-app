@@ -1,6 +1,6 @@
 {
-  "name": "material-ui-cra-tailwind-ts",
-  "version": "5.0.0",
+  "name": "react-blog-app",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@emotion/react": "11.11.3",

@@ -1,15 +1,13 @@
-import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useFormik } from "formik";
-import { Box, Container, IconButton } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import { signupSchema } from "utils/validations";
 import { Link } from "react-router-dom";
 import { PasswordField } from "components/Input";
 
 const Signup = () => {
-  const [showPassword, setShowPassword] = useState<Boolean>(false);
   const { values, errors, handleChange, handleSubmit } = useFormik({
     initialValues: {
       email: "",

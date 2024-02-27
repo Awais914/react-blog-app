@@ -1,15 +1,10 @@
-// import { Route } from '../types/Route';
+import { Route, Routes, Navigate } from "react-router-dom";
+
 import AccountSettings from "pages/Account";
 import Detail from "pages/Blog/Detail";
 import Home from "pages/Home";
 import Login from "pages/Login";
 import Signup from "pages/Signup";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
 
 const Protected = ({
   user,
@@ -43,7 +38,5 @@ const AppRoutes = () => {
     </Routes>
   );
 };
-
-// const routes: Array<Route> = [];
 
 export default AppRoutes;

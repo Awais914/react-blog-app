@@ -16,7 +16,6 @@ import { PasswordField } from "components/Input";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState<Boolean>(false);
   const { values, errors, handleChange, handleSubmit } = useFormik({
     initialValues: {
       email: "",
@@ -40,6 +39,7 @@ const Login = () => {
       <Box component="form" onSubmit={handleSubmit} className="mt-[72px]">
         <Box>
           <Typography>Email address or user name</Typography>
+
           <TextField
             name="email"
             fullWidth
@@ -61,6 +61,7 @@ const Login = () => {
         />
 
         <Link className="flex justify-end mt-2">Forget your password</Link>
+
         <FormControlLabel
           control={<Checkbox defaultChecked />}
           label="Remember me"

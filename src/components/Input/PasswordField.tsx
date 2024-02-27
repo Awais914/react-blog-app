@@ -1,6 +1,6 @@
+import { ChangeEvent, useState } from "react";
 import { VisibilityRounded, VisibilityOffRounded } from "@mui/icons-material";
 import { Box, Typography, IconButton, TextField } from "@mui/material";
-import { ChangeEvent, useState } from "react";
 
 interface PasswordFieldProps {
   title: string;
@@ -20,10 +20,12 @@ const PasswordField: React.FC<PasswordFieldProps> = (props) => {
       <Box>
         <Box className="flex justify-between items-center">
           <Typography>{props.title}</Typography>
+
           <Box className="flex items-center">
             <IconButton onClick={() => setShowPassword((prev) => !prev)}>
               {showPassword ? <VisibilityRounded /> : <VisibilityOffRounded />}
             </IconButton>
+
             <Typography className="text-lg">
               {showPassword ? "show" : "Hide"}
             </Typography>
@@ -41,6 +43,7 @@ const PasswordField: React.FC<PasswordFieldProps> = (props) => {
           helperText={props.helperText}
         />
       </Box>
+
       <Typography className="mt-1">
         Use 8 or more characters with a mix of letters, numbers & symbols
       </Typography>

@@ -2,7 +2,7 @@ import usePagination from "@mui/material/usePagination";
 import { Button, List } from "@mui/material";
 import { East, KeyboardBackspace } from "@mui/icons-material";
 
-export default function UsePagination() {
+const PaginationBar = () => {
   const { items } = usePagination({
     count: 3,
   });
@@ -56,4 +56,6 @@ export default function UsePagination() {
       </List>
     </nav>
   );
-}
+};
+
+export default PaginationBar;
