@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import {
   AppBar,
@@ -8,8 +9,11 @@ import {
   Toolbar,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import AuthContext from "contexts/AuthContext";
 
 const Header = () => {
+  const { isAuth } = useContext(AuthContext);
+
   return (
     <AppBar
       position="fixed"
@@ -40,23 +44,40 @@ const Header = () => {
             }}
           />
 
-          <Button
-            component={Link}
-            to="/login"
-            variant="outlined"
-            className="mr-4 rounded-lg"
-          >
-            Log in
-          </Button>
+          {isAuth ? (
+            <>
+              <Button
+                component={Link}
+                to="/create-post"
+                variant="contained"
+                className="rounded-lg"
+              >
+                Create Article
+              </Button>
 
-          <Button
-            component={Link}
-            to="/signup"
-            variant="contained"
-            className="rounded-lg"
-          >
-            Sign up
-          </Button>
+              <img src="/logo.png" className="ml-4" />
+            </>
+          ) : (
+            <>
+              <Button
+                component={Link}
+                to="/login"
+                variant="outlined"
+                className="mr-4 rounded-lg"
+              >
+                Log in
+              </Button>
+
+              <Button
+                component={Link}
+                to="/signup"
+                variant="contained"
+                className="rounded-lg"
+              >
+                Sign up
+              </Button>
+            </>
+          )}
         </Box>
       </Toolbar>
     </AppBar>

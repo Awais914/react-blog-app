@@ -2,8 +2,14 @@ import { DateRange } from "@mui/icons-material";
 import { Box, Button, Chip, Divider, Typography } from "@mui/material";
 import Commentslist from "../Comment/list";
 import AddComment from "../Comment/add";
+import AuthContext from "contexts/AuthContext";
+import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const BlogContent = () => {
+  const navigate = useNavigate();
+  const { isAuth } = useContext(AuthContext);
+
   return (
     <Box className="flex flex-col">
       <Box className="flex items-center">
@@ -109,18 +115,22 @@ const BlogContent = () => {
             24 comments
           </Typography>
 
-          <Typography color="primary.dark" className="text-4xl mx-4">
-            .
-          </Typography>
+          {!isAuth && (
+            <>
+              <Typography color="primary.dark" className="text-4xl mx-4">
+                .
+              </Typography>
 
-          <Typography color="info.main" className="text-[27px]">
-            Sign in to comment
-          </Typography>
+              <Typography color="info.main" className="text-[27px]">
+                Sign in to comment
+              </Typography>
+            </>
+          )}
         </Box>
 
         <Divider className="mt-7 mb-4" />
 
-        <AddComment />
+        {isAuth && <AddComment />}
 
         <Commentslist />
         <Commentslist />
