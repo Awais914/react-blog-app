@@ -28,7 +28,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ storeAuth }) => {
     validationSchema: signupSchema,
     onSubmit: async (): Promise<FetchResult<SignUpData>> => await registerUser({
       variables: {
-        authInput: {
+        input: {
           email: values.email,
           password: values.password
         }
@@ -45,8 +45,8 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ storeAuth }) => {
   }, [error])
 
   useEffect(() => {
-    if (data?.signUp) {
-      storeAuth(data.signUp.access_token!);
+    if (data?.signUp.token) {
+      storeAuth(data.signUp.token);
       navigate('/')
     }
   }, [data])

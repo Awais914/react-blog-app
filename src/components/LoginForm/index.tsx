@@ -37,8 +37,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ storeAuth }) => {
     onSubmit: async (): Promise<FetchResult<LoggedInData>> =>
       await loginUser({
         variables: {
-          authInput: {
-            email: values.email,
+          input: {
+            username: values.email,
             password: values.password,
           },
         },
@@ -54,8 +54,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ storeAuth }) => {
   }, [error]);
 
   useEffect(() => {
-    if (data?.login) {
-      storeAuth(data.login.access_token!);
+    if (data?.signIn.token) {
+      storeAuth(data.signIn.token!);
       navigate("/");
     }
   }, [data]);

@@ -1,51 +1,118 @@
-import { Box, Button, Typography } from "@mui/material";
+import { FetchResult, useMutation } from "@apollo/client";
+import { Box, Button, MenuItem, Select, Typography } from "@mui/material";
 import PageTitle from "components/Header/PageTitle";
-import { PasswordField } from "components/Input";
+import { InputField, PasswordField } from "components/Input";
 import { useFormik } from "formik";
-import { passwordUpdateSchema } from "utils/validations";
+import { CREATE_POST_MUTATION } from "gql/mutations";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { PostData, CreatePostInput } from "types";
+import { createPostSchema } from "utils/validations";
 
 const PostArticleForm = () => {
-  const { values, errors, handleChange, handleSubmit } = useFormik({
-    initialValues: {
-      password: "",
-      confirmPassword: "",
-    },
-    validationSchema: passwordUpdateSchema,
-    onSubmit: (values) => {
-      console.log("Submitted values:", values);
-    },
-  });
+  const navigate = useNavigate();
+  const [createPostMutation, { loading, error, data }] =
+    useMutation<PostData>(CREATE_POST_MUTATION);
+
+  const { values, errors, handleChange, handleSubmit } =
+    useFormik<CreatePostInput>({
+      initialValues: {
+        title: "",
+        description: "",
+        readTime: undefined,
+      },
+      validationSchema: createPostSchema,
+      onSubmit: async (): Promise<FetchResult<PostData>> =>
+        await createPostMutation({
+          variables: {
+            input: {
+              categoryIds: 1,
+              time: Date(),
+              title: values.title,
+              imgUrl:
+                "https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg",
+              description: values.description,
+            },
+          },
+        }),
+    });
 
   const isFormValid = () => {
-    return !Object.keys(errors).length && values.password;
+    return !Object.keys(errors).length && values.title;
   };
+
+  useEffect(() => {
+    error && toast.error(error?.message);
+  }, [error]);
+
+  useEffect(() => {
+    if (data?.createPost.status === 200) {
+      toast.success("Blog posted successfully!");
+      navigate("/");
+    }
+  }, [data]);
 
   return (
     <Box className="flex flex-col">
       <PageTitle title="Create New Article" />
 
       <Box component="form" onSubmit={handleSubmit} className="mt-10 w-3/4">
-        <PasswordField
-          title="Type new password"
-          name="password"
-          placeholder="Enter your new password"
-          value={values.password}
+        <InputField
+          title="Give it a title"
+          name="title"
+          value={values.title}
           onChange={handleChange}
-          error={!!errors.password}
-          helperText={errors.password}
+          error={!!errors.title}
+          type="text"
         />
 
         <Box className="mt-10" />
 
-        <PasswordField
-          title="Type new password again"
-          name="confirmPassword"
-          placeholder="Enter your new password"
-          value={values.confirmPassword}
+        <InputField
+          select
+          label="Select"
+          name="readTime"
+          title="Min. to read"
+          value={values.readTime}
           onChange={handleChange}
-          error={!!errors.confirmPassword}
-          helperText={errors.confirmPassword}
+        >
+          <MenuItem disabled selected value={0}>
+            Select
+          </MenuItem>
+          <MenuItem value={3}>3 Mins. To Read</MenuItem>
+          <MenuItem value={5}>5 Mins. To Read</MenuItem>
+          <MenuItem value={10}>10 Mins. To Read</MenuItem>
+        </InputField>
+
+        <Box className="mt-10" />
+
+        <InputField
+          multiline
+          rows={7}
+          title="Write something about it"
+          name="description"
+          value={values.description}
+          onChange={handleChange}
+          error={!!errors.description}
         />
+
+        <Box className="mt-10" />
+
+        <Box className="flex items-center">
+          <Button
+            component="label"
+            role={undefined}
+            variant="outlined"
+            tabIndex={-1}
+          >
+            Browse
+            <input type="file" accept="image/*" style={{ display: "none" }} />
+          </Button>
+          <Typography variant="body2" className="ml-3">
+            Supports: JPG, JPEG2000, PNG
+          </Typography>
+        </Box>
 
         <Button
           variant="contained"
@@ -53,10 +120,10 @@ const PostArticleForm = () => {
           size="large"
           fullWidth
           type="submit"
-          className="mt-10 py-4"
-          disabled={!isFormValid()}
+          className="mt-10 w-[356px] rounded-full"
+          disabled={!isFormValid() || loading}
         >
-          Create An Account
+          Publish Article
         </Button>
       </Box>
     </Box>

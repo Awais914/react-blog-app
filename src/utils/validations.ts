@@ -22,3 +22,8 @@ export const passwordUpdateSchema = Yup.object().shape({
     .oneOf([Yup.ref("password")], "Passwords must match")
     .required("Please confirm your password"),
 });
+
+export const createPostSchema = Yup.object().shape({
+  title: Yup.string().required("Title is required"),
+  description: Yup.string().required("Description is required"),
+});

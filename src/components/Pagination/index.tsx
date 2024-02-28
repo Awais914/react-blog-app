@@ -1,10 +1,16 @@
-import usePagination from "@mui/material/usePagination";
+import usePagination, { UsePaginationProps } from "@mui/material/usePagination";
 import { Button, List } from "@mui/material";
 import { East, KeyboardBackspace } from "@mui/icons-material";
 
-const PaginationBar = () => {
+interface PaginationBarProps {
+  totalPages: number;
+  setpage: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const PaginationBar: React.FC<PaginationBarProps> = (props) => {
   const { items } = usePagination({
-    count: 3,
+    count: props.totalPages,
+    onChange: (_, page) => props.setpage(page)
   });
 
   return (
