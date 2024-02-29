@@ -27,3 +27,7 @@ export const createPostSchema = Yup.object().shape({
   title: Yup.string().required("Title is required"),
   description: Yup.string().required("Description is required"),
 });
+
+export const createCommentSchema = Yup.object().shape({
+  desc: Yup.string().required("Description is required"),
+});

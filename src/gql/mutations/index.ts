@@ -33,3 +33,21 @@ export const CREATE_POST_MUTATION = gql`
     }
   }
 `;
+
+export const ADD_COMMENT_MUTATION = gql`
+  mutation addComment($input: AddCommentInput!) {
+    addComment(addCommentInput: $input) {
+      message
+      status
+    }
+  }
+`;
+
+export const ADD_REPLY_MUTATION = gql`
+  mutation addReply($input: ReplyInput!) {
+    reply(repliesInput: $input) {
+      message
+      status
+    }
+  }
+`;

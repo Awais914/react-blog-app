@@ -4,11 +4,28 @@ import Commentslist from "../Comment/list";
 import AddComment from "../Comment/add";
 import AuthContext from "contexts/AuthContext";
 import { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import { Post, PostDetail } from "types";
+import { GET_POST_BY_ID_QUERY } from "gql/queries";
+import { formatDate } from "utils/date";
 
 const BlogContent = () => {
+  const { postId } = useParams();
   const navigate = useNavigate();
   const { isAuth } = useContext(AuthContext);
+  const { loading, error, data } = useQuery<PostDetail>(GET_POST_BY_ID_QUERY, {
+    variables: { input: parseInt(postId!) },
+  });
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  console.log("DATA: ", data?.getPost.post);
+  const { id, createdAt, description, time, title, user, imgUrl, getComments } =
+    data?.getPost.post!;
+
+  if (!id) navigate("/");
 
   return (
     <Box className="flex flex-col">
@@ -25,7 +42,7 @@ const BlogContent = () => {
         variant="h3"
         className="mt-2 text-[32px] font-semibold"
       >
-        I Created a Developer Rap Video - Here's What I Learned
+        {title}
       </Typography>
 
       <Box className="flex content-between mt-[6px] mb-4 items-center">
@@ -34,85 +51,25 @@ const BlogContent = () => {
           className="size-[18px] rounded-full mr-2"
         />
 
-        <Typography>Jesica koli</Typography>
+        <Typography>{user?.name}</Typography>
 
         <Divider orientation="vertical" flexItem className="mx-[10px]" />
 
         <DateRange />
 
-        <Typography>02 december 2022</Typography>
+        <Typography>{formatDate(createdAt)}</Typography>
       </Box>
 
-      <img
-        src="https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg"
-        className="w-[856px] mt-8 mb-10 rounded-[5px]"
-      />
+      <img src={imgUrl} className="w-[856px] mt-8 mb-10 rounded-[5px]" />
 
-      <Typography>
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
-        illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-        explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-        odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
-        voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum
-        quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam
-        eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
-        <br />
-        <br />
-        voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam
-        corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
-        Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse
-        quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo
-        voluptas nulla pariatur Sed ut perspiciatis unde omnis iste natus error
-        sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
-        eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae
-        <br />
-        <br />
-        vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
-        aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos
-        qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui
-        dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia
-        non numquam eius modi tempora incidunt ut labore et dolore magnam
-        aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
-        exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea
-        commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea
-        voluptate velit esse quam nihil molestiae consequatur, vel illum qui
-        dolorem eum fugiat quo voluptas nulla pariatur Sed ut perspiciatis unde
-        omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-        <br />
-        <br />
-        totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
-        architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
-        quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
-        magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro
-        quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-        adipisci velit, sed quia non numquam eius modi tempora incidunt ut
-        labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima
-        veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam,
-        nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure
-        reprehenderit qui in ea voluptate velit esse quam nihil molestiae
-        consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla
-        pariatur Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
-        illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-        explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-        odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
-        <br />
-        <br />
-        voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum
-        quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam
-        eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
-        voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam
-        corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
-        Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse
-        quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo
-        voluptas nulla pariatur
+      <Typography key={id} className="whitespace-pre-line">
+        {description}
       </Typography>
 
       <Box className="flex flex-col">
         <Box className="flex mt-12">
           <Typography color="primary.dark" className="text-[27px]">
-            24 comments
+            {getComments.count} comments
           </Typography>
 
           {!isAuth && (
@@ -130,15 +87,16 @@ const BlogContent = () => {
 
         <Divider className="mt-7 mb-4" />
 
-        {isAuth && <AddComment />}
+        {isAuth && <AddComment postId={id} type="COMMENT" />}
 
-        <Commentslist />
-        <Commentslist />
-        <Commentslist />
-
-        <Button variant="outlined" className="w-[230px] self-center mt-8">
-          Load More Comments
-        </Button>
+        {getComments.comments?.map(({ id, description, user, getReplies }) => (
+          <Commentslist
+            id={id}
+            description={description}
+            user={user}
+            getReplies={getReplies}
+          />
+        ))}
       </Box>
     </Box>
   );

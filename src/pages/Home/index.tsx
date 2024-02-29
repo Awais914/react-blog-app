@@ -7,7 +7,7 @@ const Home = () => {
     <Box className="flex flex-col">
       <PageTitle title="Recent Posts" />
 
-      <PostsList />
+      <PostsList category="RECENT" />
     </Box>
   );
 };

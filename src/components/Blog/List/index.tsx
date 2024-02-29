@@ -1,31 +1,55 @@
+import { useEffect, useState } from "react";
+import { POSTS_LIST_TYPE, Post } from "types";
+import { useFetchPosts } from "hooks/useFetchPosts";
+import { PAGE_LIMIT } from "utils/constants";
 import PaginationBar from "components/Pagination";
 import BlogCard from "../Item";
-import { useLazyQuery } from "@apollo/client";
-import { ALL_POSTS_QUERY } from "gql/queries";
-import { useEffect, useState } from "react";
-import { Post, PostsListType } from "types";
 
-const PostsList = () => {
-  const [page, setpage] = useState(1)
+interface PostListProps {
+  category: POSTS_LIST_TYPE;
+  searchQuery?: string | null;
+}
 
+const PostsList: React.FC<PostListProps> = ({ category, searchQuery }) => {
+  const [page, setpage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const [posts, setPosts] = useState<Post[]>();
-  const [getPosts, { loading, data, error }] =
-    useLazyQuery<PostsListType>(ALL_POSTS_QUERY);
+  const { fetchPosts, loading, error } = useFetchPosts(category);
 
   useEffect(() => {
-    getPosts({
-      variables: { input: { page: page, limit: 2 } },
-      onCompleted: (data) => {
-        setPosts(data.allPosts.posts);
-      },
-    });
+    if (category === "SEARCH") {
+      fetchPosts({
+        variables: {
+          search: searchQuery,
+          pagination: { page: page, limit: PAGE_LIMIT },
+        },
+        onCompleted: (data) => {
+          setPosts(data?.searchPosts?.posts);
+          const { total, limit } = data?.searchPosts || {};
+          setTotalPages(Math.ceil(total! / limit!));
+        },
+      });
+    } else if (category === "MY_POSTS") {
+      fetchPosts({
+        variables: { input: { page: page, limit: PAGE_LIMIT } },
+        onCompleted: (data) => {
+          setPosts(data.myPosts.posts);
+        },
+      });
+    } else {
+      fetchPosts({
+        variables: { input: { page: page, limit: PAGE_LIMIT } },
+        onCompleted: (data) => {
+          setPosts(data.allPosts.posts);
+          const { total, limit } = data?.allPosts || {};
+          setTotalPages(Math.ceil(total! / limit!));
+        },
+      });
+    }
   }, [page]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
-
-  const { total, limit } = data?.allPosts || {}
-  const totalPages = Math.ceil(total! / limit!);
 
   return (
     <>
@@ -46,7 +70,7 @@ const PostsList = () => {
         }
       )}
 
-      <PaginationBar totalPages={totalPages} setpage={setpage}/>
+      <PaginationBar totalPages={totalPages} setpage={setpage} />
     </>
   );
 };

@@ -8,6 +8,9 @@ import Signup from "pages/Signup";
 import AuthContext from "contexts/AuthContext";
 import { useContext } from "react";
 import NewArticle from "pages/Blog/NewArticle";
+import { MY_ARTICLES_ROUTE, SEARCH_ROUTE } from "utils/constants";
+import SearchBlog from "pages/Blog/Search";
+import UserArticles from "pages/Blog/UserArticles";
 
 const Protected = ({
   user,
@@ -31,13 +34,29 @@ const AppRoutes = () => {
       <Route path="signup" element={<Signup />} />
       <Route path="login" element={<Login />} />
       <Route path="home" element={<Home />} />
-      <Route path="blogs/:id" element={<Detail />} />
-      <Route path="account" element={<AccountSettings />} />
+      <Route path="blogs/:postId" element={<Detail />} />
+      <Route path={SEARCH_ROUTE} element={<SearchBlog />} />
+      <Route
+        path={"account"}
+        element={
+          <Protected user={isAuth}>
+            <AccountSettings />
+          </Protected>
+        }
+      />
       <Route
         path="create-post"
         element={
           <Protected user={isAuth}>
             <NewArticle />
+          </Protected>
+        }
+      />
+      <Route
+        path={MY_ARTICLES_ROUTE}
+        element={
+          <Protected user={isAuth}>
+            <UserArticles />
           </Protected>
         }
       />

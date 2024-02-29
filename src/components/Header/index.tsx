@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   AppBar,
   Box,
@@ -10,9 +10,21 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import AuthContext from "contexts/AuthContext";
+import { SEARCH_ROUTE } from "utils/constants";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const [searchText, setSearchText] = useState("");
   const { isAuth } = useContext(AuthContext);
+
+  const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value.trim();
+    setSearchText(value);
+  };
+
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") navigate(`/${SEARCH_ROUTE}?query=${searchText}`);
+  };
 
   return (
     <AppBar
@@ -34,6 +46,8 @@ const Header = () => {
             className="border rounded-2xl mr-4"
             size="small"
             placeholder="Search"
+            onChange={handleChange}
+            onKeyDown={handleKeyPress}
             sx={{ backgroundColor: "secondary.light" }}
             InputProps={{
               startAdornment: (
