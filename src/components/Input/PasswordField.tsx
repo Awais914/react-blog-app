@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, Fragment, useState } from "react";
 import { VisibilityRounded, VisibilityOffRounded } from "@mui/icons-material";
 import { Box, Typography, IconButton, TextField } from "@mui/material";
 
@@ -16,7 +16,7 @@ const PasswordField: React.FC<PasswordFieldProps> = (props) => {
   const [showPassword, setShowPassword] = useState<Boolean>(false);
 
   return (
-    <>
+    <Fragment>
       <Box>
         <Box className="flex justify-between items-center">
           <Typography>{props.title}</Typography>
@@ -47,7 +47,7 @@ const PasswordField: React.FC<PasswordFieldProps> = (props) => {
       <Typography className="mt-1">
         Use 8 or more characters with a mix of letters, numbers & symbols
       </Typography>
-    </>
+    </Fragment>
   );
 };
 

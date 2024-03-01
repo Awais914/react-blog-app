@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   AppBar,
@@ -19,11 +19,12 @@ import SearchIcon from "@mui/icons-material/Search";
 import AuthContext from "contexts/AuthContext";
 import {
   ACCOUNT_ROUTE,
+  CREATE_POST,
   LOGIN_ROUTE,
   MY_ARTICLES_ROUTE,
   SEARCH_ROUTE,
   SIGNUP_ROUTE,
-} from "utils/constants";
+} from "constant";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -90,10 +91,10 @@ const Header = () => {
           />
 
           {isAuth ? (
-            <>
+            <Fragment>
               <Button
                 component={Link}
-                to="/create-post"
+                to={CREATE_POST}
                 variant="contained"
                 className="rounded-lg"
               >
@@ -136,9 +137,9 @@ const Header = () => {
                   <Typography textAlign="center">Logout</Typography>
                 </MenuItem>
               </Menu>
-            </>
+            </Fragment>
           ) : (
-            <>
+            <Fragment>
               <Button
                 component={Link}
                 to={LOGIN_ROUTE}
@@ -156,7 +157,7 @@ const Header = () => {
               >
                 Sign up
               </Button>
-            </>
+            </Fragment>
           )}
         </Box>
       </Toolbar>

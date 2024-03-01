@@ -1,9 +1,9 @@
 import { useContext, useEffect } from "react";
-import LoginForm from "components/LoginForm";
+import RegisterForm from "components/Registration";
 import AuthContext from "contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+export const Signup = () => {
   const navigate = useNavigate();
   const { isAuth, storeAuth } = useContext(AuthContext);
 
@@ -12,10 +12,6 @@ const Login = () => {
   }, []);
 
   return (
-    <>
-      <LoginForm storeAuth={storeAuth} />
-    </>
+    <RegisterForm storeAuth={storeAuth} />
   );
 };
-
-export default Login;

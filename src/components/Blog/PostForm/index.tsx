@@ -10,7 +10,7 @@ import { CREATE_POST_MUTATION } from "gql/mutations";
 import { PostData, CreatePostInput } from "types";
 import { createPostSchema } from "utils/validations";
 import { ALL_POSTS_QUERY } from "gql/queries";
-import { BLOG_ROUTE } from "utils/constants";
+import { BLOG_ROUTE } from "constant";
 
 const PostArticleForm = () => {
   const navigate = useNavigate();

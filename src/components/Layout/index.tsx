@@ -12,7 +12,8 @@ import { UserProvider } from "contexts/AuthContext";
 import { HelmetProvider } from "react-helmet-async";
 import { Toaster } from "react-hot-toast";
 import { BrowserRouter as Router } from "react-router-dom";
-import { getAppTheme } from "styles/theme";
+import { getAppTheme } from "theme";
+
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const theme = getAppTheme();

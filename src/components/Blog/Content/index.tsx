@@ -1,14 +1,14 @@
-import { useContext } from "react";
+import { Fragment, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { DateRange } from "@mui/icons-material";
 import { Box, Chip, Divider, Typography } from "@mui/material";
 import { useQuery } from "@apollo/client";
 import { GET_POST_BY_ID_QUERY } from "gql/queries";
 import { PostDetail } from "types";
-import { formatDate } from "utils/date";
 import AuthContext from "contexts/AuthContext";
 import AddComment from "../Comment/Add";
 import Commentslist from "../Comment/List";
+import { formatDate } from "utils";
 
 const BlogContent = () => {
   const { postId } = useParams();
@@ -72,7 +72,7 @@ const BlogContent = () => {
           </Typography>
 
           {!isAuth && (
-            <>
+            <Fragment>
               <Typography color="primary.dark" className="text-4xl mx-4">
                 .
               </Typography>
@@ -80,7 +80,7 @@ const BlogContent = () => {
               <Typography color="info.main" className="text-[27px]">
                 Sign in to comment
               </Typography>
-            </>
+            </Fragment>
           )}
         </Box>
 

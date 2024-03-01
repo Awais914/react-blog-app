@@ -1,5 +1,5 @@
 import Layout from "components/Layout";
-import AppRoutes from "components/Routes";
+import AppRoutes from "routes";
 
 export default function App() {
   return (

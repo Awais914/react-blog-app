@@ -7,8 +7,8 @@ import Typography from "@mui/material/Typography";
 import { Chip, Divider } from "@mui/material";
 import { AccessTime, DateRange } from "@mui/icons-material";
 import { Post } from "types";
-import { formatDate } from "utils/date";
-import { BLOG_ROUTE } from "utils/constants";
+import { formatDate } from "utils";
+import { BLOG_ROUTE } from "constant";
 
 const BlogCard: React.FC<Post> = (blog) => {
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ const BlogCard: React.FC<Post> = (blog) => {
             {blog.title}
           </Typography>
 
-          <Box className="flex content-between mt-[6px] mb-4 items-center">
+          <Box className="flex content-between mt-[6px] mb-4 items-center flex-wrap">
             <img
               src="https://tinyurl.com/y3nctk8x"
               className="size-[18px] rounded-full mr-2"

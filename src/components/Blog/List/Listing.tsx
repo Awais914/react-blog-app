@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { POSTS_LIST_TYPE, Post } from "types";
 import { useFetchPosts } from "hooks/useFetchPosts";
-import { PAGE_LIMIT } from "utils/constants";
+import { PAGE_LIMIT } from "constant";
 import BlogCard from "../Item";
 
 interface PostListProps {
@@ -56,7 +56,7 @@ const PostsListing: React.FC<PostListProps> = ({
   if (error) return <p>{error.message}</p>;
 
   return (
-    <>
+    <Fragment>
       {posts?.map(
         ({ id, createdAt, description, imgUrl, time, title, user }: Post) => {
           return (
@@ -73,7 +73,7 @@ const PostsListing: React.FC<PostListProps> = ({
           );
         }
       )}
-    </>
+    </Fragment>
   );
 };
 

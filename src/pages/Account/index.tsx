@@ -1,7 +1,5 @@
 import AccountSettings from "components/User/AccountSettings";
 
-const Account = () => {
+export const Account = () => {
   return <AccountSettings />;
 };
-
-export default Account;

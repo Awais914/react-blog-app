@@ -18,7 +18,7 @@ import { LOGIN_MUTATION } from "gql/mutations";
 import { AuthInput, LoggedInData } from "types";
 import { signupSchema } from "utils/validations";
 import toast from "react-hot-toast";
-import { SIGNUP_ROUTE } from "utils/constants";
+import { SIGNUP_ROUTE } from "constant";
 
 interface LoginFormProps {
   storeAuth: (token: string) => void;

@@ -11,7 +11,7 @@ import { PasswordField } from "components/Input";
 import { FetchResult, useMutation } from "@apollo/client";
 import { AuthInput, SignUpData } from "types";
 import { SIGN_UP_MUTATION } from "gql/mutations";
-import { LOGIN_ROUTE } from "utils/constants";
+import { LOGIN_ROUTE } from "constant";
 
 interface RegisterFormProps {
   storeAuth: (token: string) => void;

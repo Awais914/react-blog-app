@@ -1,7 +1,5 @@
 import PostArticleForm from "components/Blog/PostForm";
 
-const NewArticle = () => {
+export const NewArticle = () => {
   return <PostArticleForm />;
 };
-
-export default NewArticle;
