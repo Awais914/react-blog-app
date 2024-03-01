@@ -2,7 +2,7 @@ import { Suspense, lazy, useState } from "react";
 import { POSTS_LIST_TYPE } from "types";
 import PaginationBar from "components/Pagination";
 import Loader from "components/Loader";
-const PostsListing = lazy(() => import("./listing"));
+const PostsListing = lazy(() => import("./Listing"));
 
 interface PostListProps {
   category: POSTS_LIST_TYPE;

@@ -1,5 +1,5 @@
-import { createContext, useState } from 'react';
-import { getSession, saveSession, deleteSession } from 'utils/session';
+import { createContext, useState } from "react";
+import { getSession, saveSession, deleteSession } from "utils/session";
 
 interface AuthContextType {
   isAuth: string | boolean | null;
@@ -10,7 +10,7 @@ interface AuthContextType {
 export const AuthContext = createContext<AuthContextType>({
   isAuth: null,
   storeAuth: () => {},
-  removeAuth: () => {}
+  removeAuth: () => {},
 });
 
 interface UserProviderProps {
@@ -18,27 +18,23 @@ interface UserProviderProps {
 }
 
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
-	const [isAuth, setIsAuth] = useState<string | boolean | null>(() => {
-		return getSession('token');
-	});
-	
-	const value: AuthContextType = {
-		isAuth,
-		storeAuth: (token: string) => {
-			saveSession('token', token);
-			setIsAuth(true);
-		},
-		removeAuth: () => {
-			setIsAuth(false);
-			deleteSession();
-		}
-	};
+  const [isAuth, setIsAuth] = useState<string | boolean | null>(() => {
+    return getSession("token");
+  });
 
-	return (
-		<AuthContext.Provider value={value}>
-			{children}
-		</AuthContext.Provider>
-	);
+  const value: AuthContextType = {
+    isAuth,
+    storeAuth: (token: string) => {
+      saveSession("token", token);
+      setIsAuth(true);
+    },
+    removeAuth: () => {
+      setIsAuth(false);
+      deleteSession();
+    },
+  };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
 export const Consumer = AuthContext.Consumer;

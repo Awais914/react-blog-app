@@ -1,14 +1,16 @@
-import { FetchResult, useMutation } from "@apollo/client";
-import { Box, Button, MenuItem, Select, Typography } from "@mui/material";
-import PageTitle from "components/Header/PageTitle";
-import { InputField, PasswordField } from "components/Input";
-import { useFormik } from "formik";
-import { CREATE_POST_MUTATION } from "gql/mutations";
 import { useEffect } from "react";
-import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import { FetchResult, useMutation } from "@apollo/client";
+import { Box, Button, MenuItem, Typography } from "@mui/material";
+import toast from "react-hot-toast";
+import PageTitle from "components/Header/PageTitle";
+import { InputField } from "components/Input";
+import { CREATE_POST_MUTATION } from "gql/mutations";
 import { PostData, CreatePostInput } from "types";
 import { createPostSchema } from "utils/validations";
+import { ALL_POSTS_QUERY } from "gql/queries";
+import { BLOG_ROUTE } from "utils/constants";
 
 const PostArticleForm = () => {
   const navigate = useNavigate();
@@ -35,6 +37,7 @@ const PostArticleForm = () => {
               description: values.description,
             },
           },
+          refetchQueries: [ALL_POSTS_QUERY]
         }),
     });
 
@@ -49,7 +52,7 @@ const PostArticleForm = () => {
   useEffect(() => {
     if (data?.createPost.status === 200) {
       toast.success("Blog posted successfully!");
-      navigate("/");
+      navigate(`${BLOG_ROUTE}${data.createPost.post.id}`);
     }
   }, [data]);
 

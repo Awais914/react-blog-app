@@ -8,7 +8,15 @@ import Signup from "pages/Signup";
 import AuthContext from "contexts/AuthContext";
 import { useContext } from "react";
 import NewArticle from "pages/Blog/NewArticle";
-import { ACCOUNT_ROUTE, BLOG_ROUTE, HOME_ROUTE, LOGIN_ROUTE, MY_ARTICLES_ROUTE, SEARCH_ROUTE, SIGNUP_ROUTE } from "utils/constants";
+import {
+  ACCOUNT_ROUTE,
+  BLOG_ROUTE,
+  HOME_ROUTE,
+  LOGIN_ROUTE,
+  MY_ARTICLES_ROUTE,
+  SEARCH_ROUTE,
+  SIGNUP_ROUTE,
+} from "utils/constants";
 import SearchBlog from "pages/Blog/Search";
 import UserArticles from "pages/Blog/UserArticles";
 

@@ -14,12 +14,13 @@ import { SIGN_UP_MUTATION } from "gql/mutations";
 import { LOGIN_ROUTE } from "utils/constants";
 
 interface RegisterFormProps {
-  storeAuth: (token: string) => void
+  storeAuth: (token: string) => void;
 }
 
 const RegisterForm: React.FC<RegisterFormProps> = ({ storeAuth }) => {
-  const navigate = useNavigate()
-  const [registerUser, { loading, error, data }] = useMutation<SignUpData>(SIGN_UP_MUTATION);
+  const navigate = useNavigate();
+  const [registerUser, { loading, error, data }] =
+    useMutation<SignUpData>(SIGN_UP_MUTATION);
 
   const { values, errors, handleChange, handleSubmit } = useFormik<AuthInput>({
     initialValues: {
@@ -27,14 +28,15 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ storeAuth }) => {
       password: "",
     },
     validationSchema: signupSchema,
-    onSubmit: async (): Promise<FetchResult<SignUpData>> => await registerUser({
-      variables: {
-        input: {
-          email: values.email,
-          password: values.password
-        }
-      }
-    }),
+    onSubmit: async (): Promise<FetchResult<SignUpData>> =>
+      await registerUser({
+        variables: {
+          input: {
+            email: values.email,
+            password: values.password,
+          },
+        },
+      }),
   });
 
   const isFormValid = () => {
@@ -42,15 +44,15 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ storeAuth }) => {
   };
 
   useEffect(() => {
-    error && toast.error(error?.message)
-  }, [error])
+    error && toast.error(error?.message);
+  }, [error]);
 
   useEffect(() => {
     if (data?.signUp.token) {
       storeAuth(data.signUp.token);
-      navigate('/')
+      navigate("/");
     }
-  }, [data])
+  }, [data]);
 
   return (
     <Container className="mt-[63px] max-w-[750px]">

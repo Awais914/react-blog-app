@@ -7,8 +7,8 @@ import { GET_POST_BY_ID_QUERY } from "gql/queries";
 import { PostDetail } from "types";
 import { formatDate } from "utils/date";
 import AuthContext from "contexts/AuthContext";
-import AddComment from "../Comment/add";
-import Commentslist from "../Comment/list";
+import AddComment from "../Comment/Add";
+import Commentslist from "../Comment/List";
 
 const BlogContent = () => {
   const { postId } = useParams();

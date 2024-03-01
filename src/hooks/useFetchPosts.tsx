@@ -1,5 +1,9 @@
 import { useLazyQuery } from "@apollo/client";
-import { ALL_POSTS_QUERY, MY_POSTS_QUERY, SEARCH_POST_QUERY } from "gql/queries";
+import {
+  ALL_POSTS_QUERY,
+  MY_POSTS_QUERY,
+  SEARCH_POST_QUERY,
+} from "gql/queries";
 import { POSTS_LIST_TYPE } from "types";
 
 export const useFetchPosts = (queryType: POSTS_LIST_TYPE) => {

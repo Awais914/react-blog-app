@@ -11,7 +11,12 @@ interface PostListProps {
   setTotalPages: any;
 }
 
-const PostsListing: React.FC<PostListProps> = ({ category, searchQuery, page, setTotalPages }) => {
+const PostsListing: React.FC<PostListProps> = ({
+  category,
+  searchQuery,
+  page,
+  setTotalPages,
+}) => {
   const [posts, setPosts] = useState<Post[]>();
   const { fetchPosts, loading, error } = useFetchPosts(category);
 
@@ -45,7 +50,6 @@ const PostsListing: React.FC<PostListProps> = ({ category, searchQuery, page, se
         },
       });
     }
-
   }, [page]);
 
   if (loading) return <p>Loading...</p>;

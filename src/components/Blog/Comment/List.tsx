@@ -4,8 +4,8 @@ import { Comment } from "types";
 import { useQuery } from "@apollo/client";
 import { GET_COMMENT_REPLIES_QUERY } from "gql/queries";
 import AuthContext from "contexts/AuthContext";
-import AddComment from "./add";
-import Replies from "./replies";
+import AddComment from "./Add";
+import Replies from "./Replies";
 
 const Commentslist: React.FC<Comment> = (props) => {
   const [showComment, setShowComment] = useState(false);

@@ -47,7 +47,9 @@ const BlogCard: React.FC<Post> = (blog) => {
 
             <DateRange />
 
-            <Typography className="ml-2">{formatDate(blog.createdAt)}</Typography>
+            <Typography className="ml-2">
+              {formatDate(blog.createdAt)}
+            </Typography>
 
             <Divider orientation="vertical" flexItem className="mx-[10px]" />
 

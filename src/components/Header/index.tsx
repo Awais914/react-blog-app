@@ -49,7 +49,7 @@ const Header = () => {
   };
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") navigate(`/${SEARCH_ROUTE}?query=${searchText}`);
+    if (event.key === "Enter") navigate(`${SEARCH_ROUTE}?query=${searchText}`);
   };
 
   const handleLogout = () => {
@@ -133,9 +133,7 @@ const Header = () => {
                 ))}
                 <Divider />
                 <MenuItem onClick={handleLogout}>
-                  <Typography textAlign="center">
-                    Logout
-                  </Typography>
+                  <Typography textAlign="center">Logout</Typography>
                 </MenuItem>
               </Menu>
             </>
