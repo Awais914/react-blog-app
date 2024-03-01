@@ -1,10 +1,10 @@
-import { FetchResult, useMutation } from "@apollo/client";
-import { Box, Button, TextField, Typography } from "@mui/material";
-import { useFormik } from "formik";
-import { ADD_COMMENT_MUTATION, ADD_REPLY_MUTATION } from "gql/mutations";
-import { GET_COMMENT_REPLIES_QUERY, GET_POST_BY_ID_QUERY } from "gql/queries";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
+import { useFormik } from "formik";
+import { FetchResult, useMutation } from "@apollo/client";
+import { Box, Button, TextField, Typography } from "@mui/material";
+import { ADD_COMMENT_MUTATION, ADD_REPLY_MUTATION } from "gql/mutations";
+import { GET_COMMENT_REPLIES_QUERY, GET_POST_BY_ID_QUERY } from "gql/queries";
 import { AddCommentInput, PostCommentData } from "types";
 import { createCommentSchema } from "utils/validations";
 

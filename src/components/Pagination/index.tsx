@@ -1,28 +1,33 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Button, List } from "@mui/material";
 import { East, KeyboardBackspace } from "@mui/icons-material";
 import usePagination from "@mui/material/usePagination";
 
 interface PaginationBarProps {
   totalPages: number;
-  setpage: React.Dispatch<React.SetStateAction<number>>;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const PaginationBar: React.FC<PaginationBarProps> = ({
   totalPages,
-  setpage,
+  setPage,
 }) => {
   const { items } = usePagination({
     count: totalPages,
-    onChange: (_, page) => setpage(page),
+    onChange: (_, page) => {
+      setPage(page);
+      console.log("🚀 ~ Pagination:", page);
+    },
   });
+
+  const paginationItems = useMemo(() => items, [items]);
 
   if (totalPages === 0) return <></>;
 
   return (
     <nav>
       <List className="list-none	flex justify-center">
-        {items.map(({ page, type, selected, ...item }, index) => {
+        {paginationItems.map(({ page, type, selected, ...item }, index) => {
           let children = null;
 
           if (type === "start-ellipsis" || type === "end-ellipsis") {

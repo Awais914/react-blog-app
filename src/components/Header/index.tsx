@@ -2,20 +2,46 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   AppBar,
+  Avatar,
   Box,
   Button,
+  Divider,
+  IconButton,
   InputAdornment,
+  Menu,
+  MenuItem,
   TextField,
   Toolbar,
+  Tooltip,
+  Typography,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import AuthContext from "contexts/AuthContext";
-import { SEARCH_ROUTE } from "utils/constants";
+import {
+  ACCOUNT_ROUTE,
+  LOGIN_ROUTE,
+  MY_ARTICLES_ROUTE,
+  SEARCH_ROUTE,
+  SIGNUP_ROUTE,
+} from "utils/constants";
 
 const Header = () => {
   const navigate = useNavigate();
   const [searchText, setSearchText] = useState("");
-  const { isAuth } = useContext(AuthContext);
+  const { isAuth, removeAuth } = useContext(AuthContext);
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const settings = [
+    { title: "My Articles", link: MY_ARTICLES_ROUTE },
+    { title: "Account", link: ACCOUNT_ROUTE },
+  ];
+
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value.trim();
@@ -24,6 +50,11 @@ const Header = () => {
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") navigate(`/${SEARCH_ROUTE}?query=${searchText}`);
+  };
+
+  const handleLogout = () => {
+    setAnchorElUser(null);
+    removeAuth();
   };
 
   return (
@@ -69,13 +100,50 @@ const Header = () => {
                 Create Article
               </Button>
 
-              <img src="/logo.png" className="ml-4" />
+              <Tooltip title="Profile" className="ml-4">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="Remy Sharp" src="/logo.png" />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {settings.map((setting) => (
+                  <MenuItem
+                    component={Link}
+                    to={setting.link}
+                    key={setting.title}
+                    onClick={handleCloseUserMenu}
+                  >
+                    <Typography textAlign="center">{setting.title}</Typography>
+                  </MenuItem>
+                ))}
+                <Divider />
+                <MenuItem onClick={handleLogout}>
+                  <Typography textAlign="center">
+                    Logout
+                  </Typography>
+                </MenuItem>
+              </Menu>
             </>
           ) : (
             <>
               <Button
                 component={Link}
-                to="/login"
+                to={LOGIN_ROUTE}
                 variant="outlined"
                 className="mr-4 rounded-lg"
               >
@@ -84,7 +152,7 @@ const Header = () => {
 
               <Button
                 component={Link}
-                to="/signup"
+                to={SIGNUP_ROUTE}
                 variant="contained"
                 className="rounded-lg"
               >

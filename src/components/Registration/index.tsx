@@ -11,6 +11,7 @@ import { PasswordField } from "components/Input";
 import { FetchResult, useMutation } from "@apollo/client";
 import { AuthInput, SignUpData } from "types";
 import { SIGN_UP_MUTATION } from "gql/mutations";
+import { LOGIN_ROUTE } from "utils/constants";
 
 interface RegisterFormProps {
   storeAuth: (token: string) => void
@@ -59,7 +60,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ storeAuth }) => {
 
       <Typography className="text-center">
         Already have an account?{" "}
-        <Link to="/login" className="no-underline text-inherit">
+        <Link to={LOGIN_ROUTE} className="no-underline text-inherit">
           Log in
         </Link>
       </Typography>

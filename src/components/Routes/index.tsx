@@ -8,7 +8,7 @@ import Signup from "pages/Signup";
 import AuthContext from "contexts/AuthContext";
 import { useContext } from "react";
 import NewArticle from "pages/Blog/NewArticle";
-import { MY_ARTICLES_ROUTE, SEARCH_ROUTE } from "utils/constants";
+import { ACCOUNT_ROUTE, BLOG_ROUTE, HOME_ROUTE, LOGIN_ROUTE, MY_ARTICLES_ROUTE, SEARCH_ROUTE, SIGNUP_ROUTE } from "utils/constants";
 import SearchBlog from "pages/Blog/Search";
 import UserArticles from "pages/Blog/UserArticles";
 
@@ -31,13 +31,13 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route index element={<Home />} />
-      <Route path="signup" element={<Signup />} />
-      <Route path="login" element={<Login />} />
-      <Route path="home" element={<Home />} />
-      <Route path="blogs/:postId" element={<Detail />} />
+      <Route path={SIGNUP_ROUTE} element={<Signup />} />
+      <Route path={LOGIN_ROUTE} element={<Login />} />
+      <Route path={HOME_ROUTE} element={<Home />} />
+      <Route path={`${BLOG_ROUTE}:postId`} element={<Detail />} />
       <Route path={SEARCH_ROUTE} element={<SearchBlog />} />
       <Route
-        path={"account"}
+        path={ACCOUNT_ROUTE}
         element={
           <Protected user={isAuth}>
             <AccountSettings />

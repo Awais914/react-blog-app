@@ -1,34 +1,33 @@
+import { useContext, useState } from "react";
 import { Box, Button, Typography } from "@mui/material";
-import Replies from "./replies";
 import { Comment } from "types";
-import AddComment from "./add";
-import AuthContext from "contexts/AuthContext";
-import { useContext, useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_COMMENT_REPLIES_QUERY } from "gql/queries";
+import AuthContext from "contexts/AuthContext";
+import AddComment from "./add";
+import Replies from "./replies";
 
 const Commentslist: React.FC<Comment> = (props) => {
   const [showComment, setShowComment] = useState(false);
-  const [commentReplies, setCommentReplies] = useState<Comment[]>();
   const { isAuth } = useContext(AuthContext);
 
-  useQuery(GET_COMMENT_REPLIES_QUERY, {
+  const { loading, error, data } = useQuery(GET_COMMENT_REPLIES_QUERY, {
     variables: { input: props.id },
-    onCompleted: ({ getRepliesById }) => {
-      setCommentReplies(getRepliesById.replies);
-    },
   });
 
-  useEffect(() => {console.log('Rfected...');
-  }, [commentReplies])
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error.message}</p>;
+
+  const commentReplies: Comment[] = data?.getRepliesById?.replies;
 
   return (
     <Box className="flex mt-8">
       <img
-        src="https://www.befunky.com/images/prismic/82e0e255-17f9-41e0-85f1-210163b0ea34_hero-blur-image-3.jpg?"
+        key={props.id}
+        src="https://tinyurl.com/y3nctk8x"
         className="size-[32px] rounded-full mr-4"
       />
-      <Box>
+      <Box className="w-full">
         <Box className="flex">
           <Typography color="primary.main" className="text-base	">
             {props.user.name}

@@ -18,6 +18,7 @@ import { LOGIN_MUTATION } from "gql/mutations";
 import { AuthInput, LoggedInData } from "types";
 import { signupSchema } from "utils/validations";
 import toast from "react-hot-toast";
+import { SIGNUP_ROUTE } from "utils/constants";
 
 interface LoginFormProps {
   storeAuth: (token: string) => void;
@@ -125,7 +126,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ storeAuth }) => {
           fullWidth
           type="submit"
           className="mt-4 py-4"
-          onClick={() => navigate("/signup")}
+          onClick={() => navigate(SIGNUP_ROUTE)}
         >
           Sign up
         </Button>

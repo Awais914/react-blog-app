@@ -1,14 +1,14 @@
-import { DateRange } from "@mui/icons-material";
-import { Box, Button, Chip, Divider, Typography } from "@mui/material";
-import Commentslist from "../Comment/list";
-import AddComment from "../Comment/add";
-import AuthContext from "contexts/AuthContext";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { DateRange } from "@mui/icons-material";
+import { Box, Chip, Divider, Typography } from "@mui/material";
 import { useQuery } from "@apollo/client";
-import { Post, PostDetail } from "types";
 import { GET_POST_BY_ID_QUERY } from "gql/queries";
+import { PostDetail } from "types";
 import { formatDate } from "utils/date";
+import AuthContext from "contexts/AuthContext";
+import AddComment from "../Comment/add";
+import Commentslist from "../Comment/list";
 
 const BlogContent = () => {
   const { postId } = useParams();
@@ -19,9 +19,8 @@ const BlogContent = () => {
   });
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  if (error) return <p>{error.message}</p>;
 
-  console.log("DATA: ", data?.getPost.post);
   const { id, createdAt, description, time, title, user, imgUrl, getComments } =
     data?.getPost.post!;
 
@@ -47,7 +46,7 @@ const BlogContent = () => {
 
       <Box className="flex content-between mt-[6px] mb-4 items-center">
         <img
-          src="https://www.befunky.com/images/prismic/82e0e255-17f9-41e0-85f1-210163b0ea34_hero-blur-image-3.jpg?"
+          src="https://tinyurl.com/y3nctk8x"
           className="size-[18px] rounded-full mr-2"
         />
 

@@ -59,12 +59,11 @@ const AccountSettings = () => {
           variant="contained"
           color="primary"
           size="large"
-          fullWidth
           type="submit"
           className="mt-10 py-4"
           disabled={!isFormValid()}
         >
-          Create An Account
+          Save changes
         </Button>
       </Box>
     </Box>
