@@ -14,10 +14,7 @@ const PaginationBar: React.FC<PaginationBarProps> = ({
 }) => {
   const { items } = usePagination({
     count: totalPages,
-    onChange: (_, page) => {
-      setPage(page);
-      console.log("🚀 ~ Pagination:", page);
-    },
+    onChange: (_, page) => setPage(page),
   });
 
   const paginationItems = useMemo(() => items, [items]);
