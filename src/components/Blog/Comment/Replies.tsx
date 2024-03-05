@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import { Comment } from "types";
+import { Comment } from "interfaces";
 
 interface RepliesProps extends Comment {
   display: boolean;

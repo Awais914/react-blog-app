@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import PageTitle from "components/Header/PageTitle";
 import { InputField } from "components/Input";
 import { CREATE_POST_MUTATION } from "gql/mutations";
-import { PostData, CreatePostInput } from "types";
+import { PostData, CreatePostInput } from "interfaces";
 import { createPostSchema } from "utils/validations";
 import { ALL_POSTS_QUERY } from "gql/queries";
 import { BLOG_ROUTE } from "constant";

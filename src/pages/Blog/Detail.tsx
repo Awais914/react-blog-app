@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 import BlogContent from "components/Blog/Content";
 import { Fragment } from "react";
+import { APP_TITLE } from "constant";
 
 export const Detail = () => {
   const { postId } = useParams();
@@ -9,7 +10,7 @@ export const Detail = () => {
   return (
     <Fragment>
       <Helmet>
-        <title>BlogApp - Detail of {postId}</title>
+        <title>{APP_TITLE} - Detail of {postId}</title>
       </Helmet>
       <BlogContent />
     </Fragment>

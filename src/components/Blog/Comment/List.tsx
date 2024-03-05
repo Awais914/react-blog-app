@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Box, Button, Typography } from "@mui/material";
-import { Comment } from "types";
+import { Comment } from "interfaces";
 import { useQuery } from "@apollo/client";
 import { GET_COMMENT_REPLIES_QUERY } from "gql/queries";
 import AuthContext from "contexts/AuthContext";

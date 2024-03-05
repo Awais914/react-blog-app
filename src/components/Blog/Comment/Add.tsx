@@ -5,7 +5,7 @@ import { FetchResult, useMutation } from "@apollo/client";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { ADD_COMMENT_MUTATION, ADD_REPLY_MUTATION } from "gql/mutations";
 import { GET_COMMENT_REPLIES_QUERY, GET_POST_BY_ID_QUERY } from "gql/queries";
-import { AddCommentInput, PostCommentData } from "types";
+import { AddCommentInput, PostCommentData } from "interfaces";
 import { createCommentSchema } from "utils/validations";
 
 interface AddCommentProps {

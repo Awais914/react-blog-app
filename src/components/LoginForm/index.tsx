@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { PasswordField } from "components/Input";
 import { useMutation, FetchResult } from "@apollo/client";
 import { LOGIN_MUTATION } from "gql/mutations";
-import { AuthInput, LoggedInData } from "types";
+import { AuthInput, LoggedInData } from "interfaces";
 import { signupSchema } from "utils/validations";
 import toast from "react-hot-toast";
 import { SIGNUP_ROUTE } from "constant";

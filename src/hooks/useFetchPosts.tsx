@@ -4,7 +4,7 @@ import {
   MY_POSTS_QUERY,
   SEARCH_POST_QUERY,
 } from "gql/queries";
-import { POSTS_LIST_TYPE } from "types";
+import { POSTS_LIST_TYPE } from "interfaces";
 
 export const useFetchPosts = (queryType: POSTS_LIST_TYPE) => {
   let QUERY;

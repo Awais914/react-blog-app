@@ -4,7 +4,7 @@ import { DateRange } from "@mui/icons-material";
 import { Box, Chip, Divider, Typography } from "@mui/material";
 import { useQuery } from "@apollo/client";
 import { GET_POST_BY_ID_QUERY } from "gql/queries";
-import { PostDetail } from "types";
+import { PostDetail } from "interfaces";
 import AuthContext from "contexts/AuthContext";
 import AddComment from "../Comment/Add";
 import Commentslist from "../Comment/List";

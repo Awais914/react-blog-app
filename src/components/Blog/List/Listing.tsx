@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
-import { POSTS_LIST_TYPE, Post } from "types";
+import { POSTS_LIST_TYPE, Post } from "interfaces";
 import { useFetchPosts } from "hooks/useFetchPosts";
 import { PAGE_LIMIT } from "constant";
 import BlogCard from "../Item";

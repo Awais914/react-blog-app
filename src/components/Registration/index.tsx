@@ -9,7 +9,7 @@ import { signupSchema } from "utils/validations";
 import { Link, useNavigate } from "react-router-dom";
 import { PasswordField } from "components/Input";
 import { FetchResult, useMutation } from "@apollo/client";
-import { AuthInput, SignUpData } from "types";
+import { AuthInput, SignUpData } from "interfaces";
 import { SIGN_UP_MUTATION } from "gql/mutations";
 import { LOGIN_ROUTE } from "constant";
 
